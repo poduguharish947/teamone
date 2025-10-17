@@ -1,0 +1,16 @@
+{
+  "name": "lms",
+  "version": "1.0.0",
+  "description": "A comprehensive Learning Management System built for a 24-hour hackathon with features for both students and faculty.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

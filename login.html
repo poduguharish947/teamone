@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - EduLearn LMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --bg-light: #e6f0ff;
+      --dark-blue: #003366;
+      --light-blue: #f0f7ff;
+      --accent: #28a745;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-light), var(--light-blue));
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .login-container {
+      background: white;
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-container:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .nav-tabs .nav-link {
+      color: var(--dark-blue);
+      font-weight: 600;
+      border: none;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .nav-tabs .nav-link.active {
+      color: white;
+      background: linear-gradient(135deg, var(--primary), #0b5ed7);
+      border-color: var(--primary);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #0b5ed7);
+      border-color: var(--primary);
+      border-radius: 8px;
+      font-weight: 500;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0b5ed7, #094cca);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--dark-blue);
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .form-label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--light-blue);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 12px 15px;
+      border: 1px solid #ced4da;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+      display: none;
+      padding: 5px 10px;
+      background: #f8d7da;
+      border-radius: 5px;
+      border-left: 3px solid #dc3545;
+    }
+
+    .switch-form {
+      text-align: center;
+      margin-top: 1rem;
+      padding: 15px;
+      background: var(--light-blue);
+      border-radius: 8px;
+    }
+
+    .switch-form a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .switch-form a:hover {
+      color: #0b5ed7;
+      text-decoration: underline;
+    }
+
+    .loading {
+      display: none;
+    }
+
+    h4 {
+      color: var(--dark-blue);
+      font-weight: 600;
+      position: relative;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    h4:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    /* Welcome message */
+    .welcome-text {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .welcome-text h1 {
+      color: var(--dark-blue);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .welcome-text p {
+      color: #6c757d;
+      font-size: 1.1rem;
+    }
+
+    /* Icon styling */
+    .role-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <ul class="nav nav-tabs mb-4" id="loginTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="faculty-tab" data-bs-toggle="tab" data-bs-target="#faculty" type="button" role="tab">Faculty</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab">Student</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="loginTabsContent">
+      <!-- Faculty Login Form -->
+      <div class="tab-pane fade show active" id="faculty" role="tabpanel">
+        <div class="text-center role-icon">
+          <i class="bi bi-mortarboard-fill"></i>
+        </div>
+        <div id="faculty-login-section">
+          <h4>Faculty Login</h4>
+          <form id="facultyLoginForm" novalidate>
+            <div class="mb-3">
+              <label for="facultyEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="facultyEmail" required />
+              <div class="error-message" id="facultyEmailError">Please enter a valid email.</div>
+            </div>
+            <div class="mb-3">
+              <label for="facultyPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="facultyPassword" required />
+              <div class="error-message" id="facultyPasswordError">Please enter your password.</div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              <span class="loading" id="facultyLoginLoading">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Logging in...
+              </span>
+              <span class="button-text"><i class="bi bi-box-arrow-in-right me-2"></i>Login as Faculty</span>
+            </button>
+          </form>
+          <div class="switch-form">
+            Don't have an account? <a href="#" id="faculty-register-link">Register here</a>
+          </div>
+        </div>
+
+        <div id="faculty-register-section" style="display: none;">
+          <div class="text-center role-icon">
+            <i class="bi bi-person-plus-fill"></i>
+          </div>
+          <h4>Faculty Registration</h4>
+          <form id="facultyRegisterForm" novalidate>
+            <div class="mb-3">
+              <label for="facultyRegName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="facultyRegName" required />
+              <div class="error-message" id="facultyRegNameError">Please enter your full name.</div>
+            </div>
+            <div class="mb-3">
+              <label for="facultyRegEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="facultyRegEmail" required />
+              <div class="error-message" id="facultyRegEmailError">Please enter a valid email.</div>
+            </div>
+            <div class="mb-3">
+              <label for="facultyRegPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="facultyRegPassword" required />
+              <div class="error-message" id="facultyRegPasswordError">Password must be at least 6 characters.</div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              <span class="loading" id="facultyRegisterLoading">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Registering...
+              </span>
+              <span class="button-text"><i class="bi bi-person-check-fill me-2"></i>Register as Faculty</span>
+            </button>
+          </form>
+          <div class="switch-form">
+            Already have an account? <a href="#" id="faculty-login-link">Login here</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Login Form -->
+      <div class="tab-pane fade" id="student" role="tabpanel">
+        <div class="text-center role-icon">
+          <i class="bi bi-book-half"></i>
+        </div>
+        <div id="student-login-section">
+          <h4>Student Login</h4>
+          <form id="studentLoginForm" novalidate>
+            <div class="mb-3">
+              <label for="studentEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="studentEmail" required />
+              <div class="error-message" id="studentEmailError">Please enter a valid email.</div>
+            </div>
+            <div class="mb-3">
+              <label for="studentPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="studentPassword" required />
+              <div class="error-message" id="studentPasswordError">Please enter your password.</div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              <span class="loading" id="studentLoginLoading">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Logging in...
+              </span>
+              <span class="button-text"><i class="bi bi-box-arrow-in-right me-2"></i>Login as Student</span>
+            </button>
+          </form>
+          <div class="switch-form">
+            Don't have an account? <a href="#" id="student-register-link">Register here</a>
+          </div>
+        </div>
+
+        <div id="student-register-section" style="display: none;">
+          <div class="text-center role-icon">
+            <i class="bi bi-person-plus-fill"></i>
+          </div>
+          <h4>Student Registration</h4>
+          <form id="studentRegisterForm" novalidate>
+            <div class="mb-3">
+              <label for="studentRegName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="studentRegName" required />
+              <div class="error-message" id="studentRegNameError">Please enter your full name.</div>
+            </div>
+            <div class="mb-3">
+              <label for="studentRegEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="studentRegEmail" required />
+              <div class="error-message" id="studentRegEmailError">Please enter a valid email.</div>
+            </div>
+            <div class="mb-3">
+              <label for="studentRegPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="studentRegPassword" required />
+              <div class="error-message" id="studentRegPasswordError">Password must be at least 6 characters.</div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              <span class="loading" id="studentRegisterLoading">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Registering...
+              </span>
+              <span class="button-text"><i class="bi bi-person-check-fill me-2"></i>Register as Student</span>
+            </button>
+          </form>
+          <div class="switch-form">
+            Already have an account? <a href="#" id="student-login-link">Login here</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // API Base URL
+    const API_BASE_URL = 'http://localhost:5000/api';
+    
+    // Toggle between login and register forms
+    document.getElementById('faculty-register-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('faculty-login-section').style.display = 'none';
+      document.getElementById('faculty-register-section').style.display = 'block';
+    });
+
+    document.getElementById('faculty-login-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('faculty-register-section').style.display = 'none';
+      document.getElementById('faculty-login-section').style.display = 'block';
+    });
+
+    document.getElementById('student-register-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('student-login-section').style.display = 'none';
+      document.getElementById('student-register-section').style.display = 'block';
+    });
+
+    document.getElementById('student-login-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('student-register-section').style.display = 'none';
+      document.getElementById('student-login-section').style.display = 'block';
+    });
+
+    // Form validation functions
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidPassword(password) {
+      return password.length >= 6;
+    }
+
+    function isValidName(name) {
+      return name.trim().length > 0;
+    }
+
+    // Show loading state
+    function showLoading(buttonId, loadingId) {
+      const button = document.getElementById(buttonId);
+      const loading = document.getElementById(loadingId);
+      const buttonText = button.querySelector('.button-text');
+      
+      loading.style.display = 'inline-block';
+      buttonText.style.display = 'none';
+      button.disabled = true;
+    }
+
+    // Hide loading state
+    function hideLoading(buttonId, loadingId) {
+      const button = document.getElementById(buttonId);
+      const loading = document.getElementById(loadingId);
+      const buttonText = button.querySelector('.button-text');
+      
+      loading.style.display = 'none';
+      buttonText.style.display = 'inline-block';
+      button.disabled = false;
+    }
+
+    // Faculty Registration
+    document.getElementById('facultyRegisterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('facultyRegName');
+      const emailInput = document.getElementById('facultyRegEmail');
+      const passwordInput = document.getElementById('facultyRegPassword');
+      const nameError = document.getElementById('facultyRegNameError');
+      const emailError = document.getElementById('facultyRegEmailError');
+      const passwordError = document.getElementById('facultyRegPasswordError');
+
+      let valid = true;
+
+      if (!isValidName(nameInput.value)) {
+        nameError.style.display = 'block';
+        valid = false;
+      } else {
+        nameError.style.display = 'none';
+      }
+
+      if (!isValidEmail(emailInput.value)) {
+        emailError.style.display = 'block';
+        valid = false;
+      } else {
+        emailError.style.display = 'none';
+      }
+
+      if (!isValidPassword(passwordInput.value)) {
+        passwordError.style.display = 'block';
+        valid = false;
+      } else {
+        passwordError.style.display = 'none';
+      }
+
+      if (valid) {
+        showLoading('facultyRegisterForm', 'facultyRegisterLoading');
+        
+        // Register user via API
+        fetch(`${API_BASE_URL}/auth/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: nameInput.value.trim(),
+            email: emailInput.value,
+            password: passwordInput.value,
+            role: 'faculty'
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          hideLoading('facultyRegisterForm', 'facultyRegisterLoading');
+          
+          if (data.message) {
+            emailError.textContent = data.message;
+            emailError.style.display = 'block';
+            return;
+          }
+          
+          // Save token and user data to localStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Show success message and switch to login
+          alert('Registration successful! Please login.');
+          document.getElementById('faculty-register-section').style.display = 'none';
+          document.getElementById('faculty-login-section').style.display = 'block';
+        })
+        .catch(error => {
+          hideLoading('facultyRegisterForm', 'facultyRegisterLoading');
+          console.error('Error:', error);
+          alert('Registration failed. Please try again.');
+        });
+      }
+    });
+
+    // Student Registration
+    document.getElementById('studentRegisterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('studentRegName');
+      const emailInput = document.getElementById('studentRegEmail');
+      const passwordInput = document.getElementById('studentRegPassword');
+      const nameError = document.getElementById('studentRegNameError');
+      const emailError = document.getElementById('studentRegEmailError');
+      const passwordError = document.getElementById('studentRegPasswordError');
+
+      let valid = true;
+
+      if (!isValidName(nameInput.value)) {
+        nameError.style.display = 'block';
+        valid = false;
+      } else {
+        nameError.style.display = 'none';
+      }
+
+      if (!isValidEmail(emailInput.value)) {
+        emailError.style.display = 'block';
+        valid = false;
+      } else {
+        emailError.style.display = 'none';
+      }
+
+      if (!isValidPassword(passwordInput.value)) {
+        passwordError.style.display = 'block';
+        valid = false;
+      } else {
+        passwordError.style.display = 'none';
+      }
+
+      if (valid) {
+        showLoading('studentRegisterForm', 'studentRegisterLoading');
+        
+        // Register user via API
+        fetch(`${API_BASE_URL}/auth/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: nameInput.value.trim(),
+            email: emailInput.value,
+            password: passwordInput.value,
+            role: 'student'
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          hideLoading('studentRegisterForm', 'studentRegisterLoading');
+          
+          if (data.message) {
+            emailError.textContent = data.message;
+            emailError.style.display = 'block';
+            return;
+          }
+          
+          // Save token and user data to localStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Show success message and switch to login
+          alert('Registration successful! Please login.');
+          document.getElementById('student-register-section').style.display = 'none';
+          document.getElementById('student-login-section').style.display = 'block';
+        })
+        .catch(error => {
+          hideLoading('studentRegisterForm', 'studentRegisterLoading');
+          console.error('Error:', error);
+          alert('Registration failed. Please try again.');
+        });
+      }
+    });
+
+    // Faculty Login
+    document.getElementById('facultyLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('facultyEmail');
+      const passwordInput = document.getElementById('facultyPassword');
+      const emailError = document.getElementById('facultyEmailError');
+      const passwordError = document.getElementById('facultyPasswordError');
+
+      let valid = true;
+      if (!isValidEmail(emailInput.value)) {
+        emailError.style.display = 'block';
+        valid = false;
+      } else {
+        emailError.style.display = 'none';
+      }
+
+      if (passwordInput.value.trim() === '') {
+        passwordError.style.display = 'block';
+        valid = false;
+      } else {
+        passwordError.style.display = 'none';
+      }
+
+      if (valid) {
+        showLoading('facultyLoginForm', 'facultyLoginLoading');
+        
+        // Login user via API
+        fetch(`${API_BASE_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: emailInput.value,
+            password: passwordInput.value
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          hideLoading('facultyLoginForm', 'facultyLoginLoading');
+          
+          if (data.message) {
+            emailError.textContent = data.message;
+            emailError.style.display = 'block';
+            return;
+          }
+          
+          // Save token and user data to localStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Redirect to faculty dashboard
+          window.location.href = 'faculty.html';
+        })
+        .catch(error => {
+          hideLoading('facultyLoginForm', 'facultyLoginLoading');
+          console.error('Error:', error);
+          // More descriptive error message
+          if (error.message.includes('Failed to fetch')) {
+            emailError.textContent = 'Unable to connect to server. Please ensure the backend is running.';
+          } else {
+            emailError.textContent = 'Login failed. Please check your credentials and try again.';
+          }
+          emailError.style.display = 'block';
+        });
+      }
+    });
+
+    // Student Login
+    document.getElementById('studentLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('studentEmail');
+      const passwordInput = document.getElementById('studentPassword');
+      const emailError = document.getElementById('studentEmailError');
+      const passwordError = document.getElementById('studentPasswordError');
+
+      let valid = true;
+      if (!isValidEmail(emailInput.value)) {
+        emailError.style.display = 'block';
+        valid = false;
+      } else {
+        emailError.style.display = 'none';
+      }
+
+      if (passwordInput.value.trim() === '') {
+        passwordError.style.display = 'block';
+        valid = false;
+      } else {
+        passwordError.style.display = 'none';
+      }
+
+      if (valid) {
+        showLoading('studentLoginForm', 'studentLoginLoading');
+        
+        // Login user via API
+        fetch(`${API_BASE_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: emailInput.value,
+            password: passwordInput.value
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          hideLoading('studentLoginForm', 'studentLoginLoading');
+          
+          if (data.message) {
+            emailError.textContent = data.message;
+            emailError.style.display = 'block';
+            return;
+          }
+          
+          // Save token and user data to localStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Redirect to student dashboard
+          window.location.href = 'student.html';
+        })
+        .catch(error => {
+          hideLoading('studentLoginForm', 'studentLoginLoading');
+          console.error('Error:', error);
+          // More descriptive error message
+          if (error.message.includes('Failed to fetch')) {
+            emailError.textContent = 'Unable to connect to server. Please ensure the backend is running.';
+          } else {
+            emailError.textContent = 'Login failed. Please check your credentials and try again.';
+          }
+          emailError.style.display = 'block';
+        });
+      }
+    });
+
+    // Tab switching based on URL
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+
+      if (tab === 'student') {
+        new bootstrap.Tab(document.querySelector('#student-tab')).show();
+      } else if (tab === 'faculty') {
+        new bootstrap.Tab(document.querySelector('#faculty-tab')).show();
+      }
+
+      // Optional: Clean the URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    });
+  </script>
+
+</body>
+</html>
