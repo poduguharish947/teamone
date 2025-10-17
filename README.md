@@ -1,181 +1,246 @@
-# EduLearn LMS - Learning Management System
+# Course Management System
 
-A comprehensive Learning Management System built for a 24-hour hackathon with features for both students and faculty.
+A comprehensive full-stack web application for managing courses, assignments, enrollments, and grading with advanced features for both teachers and students.
 
-## 🏆 Hackathon Ranking Achieved: Platinum Level
+## 🌟 Features
 
-This project implements all required user stories from Bronze to Platinum levels:
+### Core Features
+- **User Authentication** - Secure registration and login for teachers and students
+- **Course Management** - Create, edit, and delete courses (teacher role)
+- **Course Enrollment** - Browse and enroll in available courses (student role)
+- **Assignment Submission** - Submit assignments with file attachments
+- **Grading System** - Grade assignments with feedback and analytics
+- **Advanced Features** - Discussions, course materials, notifications, and progress tracking
 
-### Bronze Level ✅
-- User Registration & Login
-- Course Management (Teacher role)
-- Course Viewing (Student role)
+### User Stories Implemented
+1. ✅ **Registration & Login** - User authentication system
+2. ✅ **Course Management** - Full CRUD operations for courses
+3. ✅ **Course Enrollment (Silver)** - Student enrollment functionality
+4. ✅ **Assignment Submission (Gold)** - Assignment workflow
+5. ✅ **Grading System (Platinum)** - Comprehensive grading with analytics
+6. ✅ **Advanced Features** - Discussions, materials, notifications, and more
 
-### Silver Level ✅
-- Course Enrollment
+## 🚀 Quick Start
 
-### Gold Level ✅
-- Assignment Submission
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (v4.4 or higher)
+- Modern web browser
 
-### Platinum Level ✅
-- Grading System
+### Installation
 
-## 🚀 Features
+1. **Clone the repository**
+```bash
+git clone https://github.com/YOUR_USERNAME/course-management-system.git
+cd course-management-system
+```
 
-### For Students:
-- User registration and authentication
-- Browse available courses
-- Enroll in courses
-- View enrolled courses
-- Submit assignments
-- View grades and feedback
+2. **Set up the backend**
+```bash
+cd backend
+npm install
+```
 
-### For Faculty:
-- User registration and authentication
-- Create and manage courses
-- View enrolled students
-- Create assignments
-- Grade student submissions
-- View submission statistics
+3. **Configure environment variables**
+Create a `.env` file in the `backend` directory:
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/userdb
+```
 
-## 🛠️ Tech Stack
+4. **Start MongoDB**
+```bash
+# Windows
+net start MongoDB
 
-### Frontend:
-- **HTML5, CSS3, JavaScript**
-- **Bootstrap 5** for responsive design
-- **Client-side storage** with localStorage (fallback when backend is not available)
+# macOS/Linux
+sudo systemctl start mongod
+```
 
-### Backend:
-- **Node.js** with Express.js
-- **MongoDB** with Mongoose ODM
-- **JWT** for authentication
-- **Bcrypt.js** for password hashing
+5. **Start the backend server**
+```bash
+cd backend
+node server.js
+```
+
+6. **Access the application**
+Open your browser and navigate to:
+- **Modern Dashboard (with backend)**: Open `Project-Modern.html`
+- **Standalone Version**: Open `Project-Modern-Standalone.html`
 
 ## 📁 Project Structure
 
 ```
-lms/
-├── index.html        # Landing page
-├── login.html        # Authentication page
-├── student.html      # Student dashboard
-├── faculty.html      # Faculty dashboard
-├── README.md         # Project documentation
-└── backend/          # Backend API
-    ├── controllers/
-    ├── middleware/
-    ├── models/
-    ├── routes/
-    ├── .env
-    ├── package.json
-    ├── server.js
-    └── README.md
+course-management-system/
+├── backend/
+│   ├── server.js           # Main backend API (36 endpoints, 7 schemas)
+│   ├── package.json        # Backend dependencies
+│   ├── .env               # Environment configuration
+│   └── README.md          # API documentation
+├── Project-Modern.html    # Main entry point (backend integration)
+├── Project-Modern-Standalone.html  # Standalone version (no backend required)
+├── dashboard-modern.html  # Modern UI dashboard
+├── dashboard-modern-standalone.js  # Standalone functionality
+├── dashboard-advanced.js  # Advanced features logic
+├── QUICK_START.md         # Quick start guide
+├── COMPLETE_FEATURES_GUIDE.md  # Detailed feature documentation
+├── SYSTEM_ARCHITECTURE.md # Technical architecture
+└── TESTING_GUIDE.md       # Testing procedures
 ```
 
-## ▶️ How to Run
+## 🎯 Usage
 
-### Option 1: With Backend (Recommended)
+### For Teachers
+1. Register/Login with a teacher account
+2. Create courses from the dashboard
+3. Add assignments to your courses
+4. Add course materials and resources
+5. Grade student submissions
+6. Participate in course discussions
+7. View analytics and student progress
 
-1. **Start MongoDB**
-   Make sure MongoDB is running on your system. If not installed, download from [MongoDB website](https://www.mongodb.com/try/download/community).
+### For Students
+1. Register/Login with a student account
+2. Browse available courses
+3. Enroll in courses
+4. Submit assignments
+5. View grades and feedback
+6. Download course materials
+7. Participate in discussions
 
-2. **Setup Backend**
-   ```bash
-   cd backend
-   npm install
-   ```
-
-3. **Configure Environment**
-   Create a `.env` file in the backend directory:
-   ```
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/lms
-   JWT_SECRET=your_jwt_secret_key_here
-   ```
-
-4. **Start Backend Server**
-   ```bash
-   npm start
-   # or for development with auto-restart
-   npm run dev
-   ```
-
-5. **Open Frontend**
-   Open `index.html` in a web browser and use the application with full backend functionality.
-
-### Option 2: Frontend Only (Static)
-
-1. Open `index.html` in a web browser
-2. The application will use localStorage for data persistence
-3. Note: Data will not persist between different browsers or devices
-
-## 🌐 Hosting
-
-### Frontend
-This application is built with static files and can be hosted on any static hosting service:
-- Vercel
-- Netlify
-- GitHub Pages
-- Render
-- AWS S3
+## 🛠️ Technology Stack
 
 ### Backend
-The backend can be deployed to:
-- Heroku
-- Render
-- AWS Elastic Beanstalk
-- DigitalOcean App Platform
+- **Node.js** with Express framework
+- **MongoDB** with Mongoose ODM
+- **bcryptjs** for password hashing
+- **CORS** enabled for frontend communication
 
-## 🎯 User Stories Implementation
+### Frontend
+- **HTML5, CSS3, JavaScript**
+- **Responsive Design** with modern UI/UX
+- **LocalStorage** for standalone mode
+- **Fetch API** for backend communication
 
-### User Story 1 – User Registration & Login
-- Students and faculty can register with name, email, password, and role
-- Secure login functionality with validation
-- JWT-based authentication for backend
+## 📚 Documentation
 
-### User Story 2 – Course Management
-- Faculty can create courses with title, description, and duration
-- Students can view all available courses
-- Courses display with optional YouTube video integration
+- [Quick Start Guide](QUICK_START.md) - Get started in 5 minutes
+- [Complete Features Guide](COMPLETE_FEATURES_GUIDE.md) - All features explained
+- [System Architecture](SYSTEM_ARCHITECTURE.md) - Technical design details
+- [Testing Guide](TESTING_GUIDE.md) - How to test the application
+- [Setup Guide](SETUP_GUIDE.md) - Detailed installation instructions
 
-### User Story 3 – Course Enrollment
-- Students can enroll in courses
-- Students can view their enrolled courses
-- Faculty can see enrollment statistics
+## 🌐 Deployment Options
 
-### User Story 4 – Assignment Submission
-- Faculty can create assignments with due dates
-- Students can submit assignments
-- Faculty can view all submissions
+### Option 1: Standalone Version (No Backend Required)
+Simply open `Project-Modern-Standalone.html` in any modern browser. All data is stored locally using localStorage.
 
-### User Story 5 – Grading System
-- Faculty can grade student assignments with scores and feedback
-- Students can view their grades
-- Overall performance tracking
+### Option 2: Full-Stack Deployment
+1. Deploy backend to services like Heroku, Render, or Railway
+2. Update MongoDB connection to cloud database (MongoDB Atlas)
+3. Host frontend on GitHub Pages, Netlify, or Vercel
+4. Update API endpoints in frontend files
 
-## 📸 Screenshots
+### GitHub Pages Deployment
+```bash
+# Deploy standalone version to GitHub Pages
+git checkout -b gh-pages
+git add Project-Modern-Standalone.html
+git commit -m "Deploy standalone version"
+git push origin gh-pages
+```
 
-### Landing Page
-![Landing Page](screenshots/landing.png)
+## 🔧 API Endpoints
 
-### Login/Registration
-![Login Page](screenshots/login.png)
+The backend provides 36 REST API endpoints across 7 database schemas:
 
-### Faculty Dashboard
-![Faculty Dashboard](screenshots/faculty.png)
+- **Authentication**: `/register`, `/login`
+- **Courses**: `/courses` (CRUD operations)
+- **Enrollments**: `/enrollments` (enrollment management)
+- **Assignments**: `/assignments` (assignment workflow)
+- **Submissions**: `/submissions` (submission handling)
+- **Grades**: `/grades` (grading system)
+- **Advanced**: Discussions, materials, notifications
 
-### Student Dashboard
-![Student Dashboard](screenshots/student.png)
+See [backend/README.md](backend/README.md) for complete API documentation.
 
-## 🤝 Team
+## 🧪 Testing
 
-- [Your Name] - Full Stack Developer
+Run the comprehensive test suite:
+```bash
+# Manual testing with provided test cases
+# See TESTING_GUIDE.md for detailed procedures
+```
 
-## 📝 License
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## 👥 Authors
+
+- Harish - Initial work and development
+
+## 🌟 Features Breakdown
+
+### User Story 1: Registration & Login ✅
+- Secure user authentication with bcrypt password hashing
+- Role-based access (Teacher/Student)
+- Session management
+- Form validation
+
+### User Story 2: Course Management ✅
+- CRUD operations for courses
+- Course details (title, description, schedule)
+- Teacher-only access control
+- Course listing and search
+
+### User Story 3: Course Enrollment (Silver) ✅
+- Student enrollment system
+- Available courses browsing
+- Enrollment tracking
+- "My Courses" view
+
+### User Story 4: Assignment Submission (Gold) ✅
+- Create and manage assignments
+- File submission support
+- Due date tracking
+- Submission history
+
+### User Story 5: Grading System (Platinum) ✅
+- Grade assignments with scores and feedback
+- Grade analytics and statistics
+- Performance tracking
+- Grade distribution charts
+
+### User Story 6: Advanced Features ✅
+- **Discussions**: Course-specific discussion boards
+- **Materials**: Upload and share course materials
+- **Notifications**: Real-time activity notifications
+- **Progress Tracking**: Visual progress indicators
+- **Analytics Dashboard**: Comprehensive statistics
+
 ## 🙏 Acknowledgments
 
-- Bootstrap for UI components
-- Flaticon for icons
-- Freepik for images
+- Built as part of a web development course project
+- Implements best practices for full-stack development
+- Progressive enhancement approach with standalone fallback
+
+## 📞 Support
+
+For issues, questions, or contributions:
+- Open an issue on GitHub
+- Check the documentation in the `/docs` folder
+- Review the testing guide for troubleshooting
+
+---
+
+**Note**: This project includes both a full-stack version (with backend API) and a standalone version (using localStorage) to ensure maximum accessibility and ease of testing.

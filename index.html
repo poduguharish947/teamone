@@ -2,379 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Welcome to EduLearn LMS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .hero-section {
-      height: 90vh;
-      background: linear-gradient(135deg, #003366, #002244);
-      color: white;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.7) 90%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .hero-section h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-section p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-    }
-
-    .feature-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #e6f0ff, #ffffff);
-      border-radius: 50%;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover .feature-icon {
-      transform: scale(1.1);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    footer {
-      background: linear-gradient(135deg, #222, #000);
-      color: white;
-    }
-
-    .feature-card {
-      transition: all 0.3s ease;
-      height: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      border: none;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .feature-card .card-body {
-      padding: 2rem;
-    }
-
-    .cta-button {
-      transition: all 0.3s ease;
-      border-radius: 50px;
-      font-weight: 600;
-      padding: 12px 30px;
-      margin: 0 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-light {
-      background: linear-gradient(135deg, #ffffff, #f0f0f0);
-      border: none;
-    }
-
-    .btn-success {
-      background: linear-gradient(135deg, #28a745, #218838);
-      border: none;
-    }
-
-    /* Section styling */
-    #features {
-      background: linear-gradient(135deg, #f8f9fa, #ffffff);
-      position: relative;
-      overflow: hidden;
-    }
-
-    #features:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjAuNSIgZmlsbD0iI2RkZCIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
-      opacity: 0.1;
-    }
-
-    #about {
-      background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    }
-
-    /* Navbar */
-    .navbar {
-      background: linear-gradient(135deg, #003366, #002244);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-brand {
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    /* About image */
-    #about img {
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s ease;
-    }
-
-    #about img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Section titles */
-    h2, h3 {
-      position: relative;
-      padding-bottom: 15px;
-      margin-bottom: 2rem;
-    }
-
-    h2:after, h3:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #0d6efd, #28a745);
-      border-radius: 2px;
-    }
-
-    /* List items */
-    #about ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    #about ul li {
-      position: relative;
-      padding-left: 30px;
-      margin-bottom: 10px;
-    }
-
-    #about ul li:before {
-      content: '\f26b';
-      font-family: 'bootstrap-icons';
-      position: absolute;
-      left: 0;
-      top: 2px;
-      color: #0d6efd;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Registration & Login</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h2 id="form-title">User Registration</h2>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">EduLearn LMS</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-center">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item ms-2">
-            <a class="btn btn-primary px-3" href="login.html">Login</a>
-          </li>
-        </ul>
-      </div>
+    <!-- Registration Form -->
+    <form id="registerForm" class="active">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <select id="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="Student">Student</option>
+        <option value="Teacher">Teacher</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- Login Form -->
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="toggle">
+      <span id="toggleLink">Already have an account? Login</span>
     </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section text-white text-center d-flex align-items-center justify-content-center">
-    <div class="hero-content">
-      <h1 class="display-4 fw-bold">Empower Learning. Empower Growth.</h1>
-      <p class="lead">Create, manage, and explore courses with our professional LMS platform.</p>
-      <div class="d-flex justify-content-center gap-3 mt-3 flex-wrap">
-        <a href="login.html?tab=faculty" class="btn btn-lg btn-light px-4 cta-button">
-          <i class="bi bi-mortarboard-fill me-2"></i>Faculty Login
-        </a>
-        <a href="login.html?tab=student" class="btn btn-lg btn-success px-4 cta-button">
-          <i class="bi bi-book-half me-2"></i>Student Login
-        </a>
-      </div>
-    </div>
-  </section>
+    <p class="message" id="message"></p>
+  </div>
 
-  <!-- Features Section -->
-  <section id="features" class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">Features</h2>
-      <div class="row g-4">
-        <div class="col-md-4 text-center">
-          <div class="card feature-card shadow-sm p-4">
-            <div class="feature-icon mb-3">
-              <i class="bi bi-mortarboard-fill" style="font-size: 2rem; color: #0d6efd;"></i>
-            </div>
-            <h5>Faculty Dashboard</h5>
-            <p>Create and manage interactive courses with videos, PDFs, and more.</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="card feature-card shadow-sm p-4">
-            <div class="feature-icon mb-3">
-              <i class="bi bi-book-half" style="font-size: 2rem; color: #28a745;"></i>
-            </div>
-            <h5>Student Learning</h5>
-            <p>Access learning materials, watch videos, and track your progress.</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="card feature-card shadow-sm p-4">
-            <div class="feature-icon mb-3">
-              <i class="bi bi-phone" style="font-size: 2rem; color: #ffc107;"></i>
-            </div>
-            <h5>Fully Responsive</h5>
-            <p>Optimized for all devices – desktop, tablet, and mobile.</p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="row g-4 mt-4">
-        <div class="col-md-4 text-center">
-          <div class="card feature-card shadow-sm p-4">
-            <div class="feature-icon mb-3">
-              <i class="bi bi-file-earmark-text" style="font-size: 2rem; color: #17a2b8;"></i>
-            </div>
-            <h5>Assignments & Grading</h5>
-            <p>Create assignments, submit work, and receive feedback from instructors.</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="card feature-card shadow-sm p-4">
-            <div class="feature-icon mb-3">
-              <i class="bi bi-person-check" style="font-size: 2rem; color: #6f42c1;"></i>
-            </div>
-            <h5>Course Enrollment</h5>
-            <p>Easily enroll in courses and track your enrolled classes.</p>
-          </div>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="card feature-card shadow-sm p-4">
-            <div class="feature-icon mb-3">
-              <i class="bi bi-shield-lock" style="font-size: 2rem; color: #dc3545;"></i>
-            </div>
-            <h5>Secure Login</h5>
-            <p>Secure user authentication for both students and faculty.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <div id="aboutImageContainer" style="background: linear-gradient(135deg, #0d6efd, #6f42c1); border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); height: 400px; display: flex; align-items: center; justify-content: center;">
-            <i class="bi bi-laptop" style="font-size: 8rem; color: white;"></i>
-          </div>
-          <img id="aboutImage" src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Online Learning" class="img-fluid rounded shadow" style="display: none;" onerror="handleImageError()" onload="showImage()" />
-        </div>
-        <div class="col-md-6">
-          <h3>About EduLearn</h3>
-          <p>EduLearn LMS is a simple and powerful platform that connects mentors and learners. Whether you're a teacher wanting to share knowledge or a student eager to learn, our platform provides a seamless experience tailored to your needs.</p>
-          <ul>
-            <li>Easy course creation and management</li>
-            <li>Student-friendly dashboard with enrollment</li>
-            <li>Assignment creation, submission, and grading</li>
-            <li>Modern UI built with Bootstrap</li>
-            <li>Fully responsive design for all devices</li>
-          </ul>
-          <div class="d-flex flex-wrap gap-2">
-            <a href="login.html?tab=faculty" class="btn btn-outline-primary mt-3">
-              <i class="bi bi-mortarboard-fill me-2"></i>Faculty Login
-            </a>
-            <a href="login.html?tab=student" class="btn btn-outline-success mt-3">
-              <i class="bi bi-book-half me-2"></i>Student Login
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="text-white py-4 text-center">
-    <div class="container">
-      <p class="mb-0">&copy; 2025 EduLearn LMS. All rights reserved.</p>
-      <p class="mb-0 mt-2"><small>Learning Management System</small></p>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Handle image loading and fallbacks
-    function handleImageError() {
-      console.log('Image failed to load, showing fallback');
-      document.getElementById('aboutImageContainer').style.display = 'flex';
-      document.getElementById('aboutImage').style.display = 'none';
-    }
-    
-    function showImage() {
-      console.log('Image loaded successfully');
-      document.getElementById('aboutImageContainer').style.display = 'none';
-      document.getElementById('aboutImage').style.display = 'block';
-    }
-    
-    // Preload images when page loads
-    window.addEventListener('load', function() {
-      // Try to load the about image
-      const img = document.getElementById('aboutImage');
-      img.src = img.src; // This will trigger onload or onerror
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>

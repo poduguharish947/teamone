@@ -1,16 +1,43 @@
 {
-  "name": "lms",
-  "version": "1.0.0",
-  "description": "A comprehensive Learning Management System built for a 24-hour hackathon with features for both students and faculty.",
-  "main": "server.js",
+  "name": "course-management-system",
+  "version": "2.0.0",
+  "description": "A comprehensive full-stack course management system with assignments, grading, discussions, and analytics",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "cd backend && npm install && node server.js",
+    "backend": "cd backend && node server.js",
+    "backend-dev": "cd backend && nodemon server.js",
+    "install-backend": "cd backend && npm install",
+    "standalone": "start Project-Modern-Standalone.html",
+    "open": "start Project-Modern.html"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^5.1.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/course-management-system.git"
+  },
+  "keywords": [
+    "course-management",
+    "lms",
+    "learning-management-system",
+    "education",
+    "assignment-submission",
+    "grading-system",
+    "student-portal",
+    "teacher-dashboard",
+    "enrollment",
+    "mongodb",
+    "express",
+    "nodejs",
+    "full-stack"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/course-management-system/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/course-management-system#readme",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   }
 }
